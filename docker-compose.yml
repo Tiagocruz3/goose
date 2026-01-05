@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  goose:
+    image: ghcr.io/block/goose:latest
+    container_name: goose-cli
+    env_file:
+      - .env
+    volumes:
+      - ./workspace:/workspace
+      - goose-config:/home/goose/.config/goose
+      - goose-data:/home/goose/.local/share/goose
+    working_dir: /workspace
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+    command: session
+
+volumes:
+  goose-config:
+  goose-data:
